@@ -23,7 +23,7 @@ namespace LCKMAT002{
 
             bool read();
 
-            string getData(int y, int x) const;
+            string getData(const int & y, const int & x) const;
             int getNumberOfRows() const;
             int getNumberOfColumns() const;
 

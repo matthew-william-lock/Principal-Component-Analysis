@@ -45,7 +45,7 @@ namespace LCKMAT002 {
         return true;      
     }
 
-    string CSV::getData(int y, int x) const {
+    string CSV::getData(const int & y, const int & x) const {
         return data.at(y).at(x);
     }
 
