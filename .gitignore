@@ -1,4 +1,2 @@
 *.o
 analyser 
-eigen/*
-!*eigen/Eigen
