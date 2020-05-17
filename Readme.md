@@ -4,7 +4,7 @@
 - The program will write the answers to the assignment to a text file **output.txt** in the main directory
 - This program makes use of the [C++ template library for linear algebra](http://eigen.tuxfamily.org/)
 
-## Compilation
+## Compilation and Running
 **Step 1:** Compile Program
 ```
 cd src
