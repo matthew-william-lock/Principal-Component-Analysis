@@ -38,8 +38,8 @@ int main() {
     // Step 1 - Subtract the mean
     data = data.rowwise()-data.colwise().mean();
 
-    cout<<"DATA"<<endl;
-    cout<<data<<endl<<endl;
+    // cout<<"Mean subtracted data "<<endl; // Print the data
+    // cout<<data<<endl<<endl;
 
     // Step 2 - Calculate the covariance matrix
     MatrixXd intCov = data.rowwise()-data.colwise().mean();
@@ -56,8 +56,8 @@ int main() {
     cout<<"Eigen Vectors"<<endl;
     cout<<eigenVec<<endl<<endl;
 
-    cout<<"Eigen Values"<<endl;
-    cout<<eigenVal<<endl<<endl;
+    // cout<<"Eigen Values"<<endl;
+    // cout<<eigenVal<<endl<<endl;
 
     // Step 4 - Reorder EigenVectors and Values
     eigenVec.col(0).swap(eigenVec.col(1));
@@ -66,49 +66,38 @@ int main() {
     cout<<"Ordered Eigen Vectors"<<endl;
     cout<<eigenVec<<endl<<endl;
 
-    cout<<"Ordered Values"<<endl;
-    cout<<eigenVal<<endl<<endl;
+    // cout<<"Ordered Values"<<endl;
+    // cout<<eigenVal<<endl<<endl;
 
     // Total Variance
     double totalVar = cov(0,0) + cov(1,1);
 
-    cout<<"Total Variance : "<<totalVar<<endl<<endl;
+    // Write Results to text file
+    ofstream myfile;
+    myfile.open ("../output.txt");
 
-    // Variance from components 1
-    auto featVec = eigenVec.col(0).transpose();
-    auto rowAdj = data.transpose();
-    MatrixXd finalData = (featVec*rowAdj);
-    finalData=finalData.transpose();
+    // 1
+    myfile<<"1.\tPrincipal Component \t1\t\t\t2"<<endl;
+    myfile<<"\tEigenvalue\t\t\t\t"<<eigenVal(0)<<"\t\t"<<eigenVal(1)<<endl;
 
-    double std_dev1 ;
-    finalData= (finalData.rowwise() - finalData.colwise().mean());
-    for (size_t i = 0; i < finalData.size(); i++){
-        std_dev1=finalData(i,0)*finalData(i,0);
-    }
-    std_dev1=std_dev1/(finalData.size()-1);   
-    cout<<"Component 1 Varience : "<< std_dev1<<endl<<endl;
+    // 2
+    myfile<<"2.\tPrincipal Component 1 Eigenvector:"<<endl;
+    myfile<<eigenVec.col(0)<<endl;
+    myfile<<"\tPrincipal Component 2 Eigenvector:"<<endl;
+    myfile<<eigenVec.col(1)<<endl;
 
-    // Variance from components 2
-    featVec = eigenVec.col(1).transpose();
-    finalData = (featVec*rowAdj);
-    finalData=finalData.transpose();
+    // 3 
+    myfile<<"3.\tCovariance Matrix"<<endl;
+    myfile<<cov<<endl;
 
-    double std_dev2 ;
-    finalData= (finalData.rowwise() - finalData.colwise().mean());
-    for (size_t i = 0; i < finalData.size(); i++){
-        std_dev2=finalData(i,0)*finalData(i,0);
-    }
-    std_dev2=std_dev2/(finalData.size()-1);
-    cout<<"Component 2 Varience : "<< std_dev2<<endl<<endl;
+    // 4
+    myfile<<"4.\tTotal Variance : "<<totalVar<<endl;
 
+    //5
+    myfile<<"5.Proportion of variance due to PC 1 : "<<eigenVal(0)/totalVar*100<<" %"<<endl;
+    myfile<<"Proportion of variance due to PC 2 : "<<eigenVal(1)/totalVar*100<<" %"<<endl;
 
-
-
-
-
-    
-
-
-    return 0;
+    myfile.close();
+    return 0;   
 
 }

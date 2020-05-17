@@ -1,0 +1,14 @@
+1.	Principal Component 	1			2
+	Eigenvalue				154.311		9.16296
+2.	Principal Component 1 Eigenvector:
+0.939141
+0.343532
+	Principal Component 2 Eigenvector:
+-0.343532
+ 0.939141
+3.	Covariance Matrix
+137.181 46.8283
+46.8283 26.2925
+4.	Total Variance : 163.474
+5.Proportion of variance due to PC 1 : 94.3948 %
+Proportion of variance due to PC 2 : 5.60516 %
